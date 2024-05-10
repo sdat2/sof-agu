@@ -18,33 +18,22 @@ FIGURE_PATH = os.path.join(PROJECT_PATH, "figures")
 KO_PATH = os.path.join(SRC_PATH, "data", "kim_(&orsi)_altimetric_fronts")
 
 # Data directory on GWS
-GWS_DATA_DIR = pathlib.Path("/gws/nopw/j04/ai4er/users/sdat2/OLD")
-
 # Figure type
 FIGURE_TYPE = ".png"
 
 # start ****DATA LOCATION section***
 # This will certainly need to be changed on your macine
+GWS_DATA_DIR = DATA_PATH
 
-# Paths to BSOSE (unique to Jasmin)
-if platform in ["Linux", "linux"]:
-    GEN_DATA_PATH: str = os.path.join(GWS_DATA_DIR, "bsose_data")
-    BSOSE_PATH: str = os.path.join(GEN_DATA_PATH, "bsose_stuv")
-    DEFAULT_NC: str = (
-        str(GWS_DATA_DIR) + "/nc/i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
+
+
+GEN_DATA_PATH: str = os.path.join(GWS_DATA_DIR, "bsose_data")
+BSOSE_PATH: str = os.path.join(GEN_DATA_PATH, "bsose_stuv")
+DEFAULT_NC: str = os.path.join(
+        str(GWS_DATA_DIR), "nc", "i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
     )
 
-# Paths to different BSOSE-i106 files (unique to my machine):
-elif platform in ["Darwin", "darwin"]:
-    BSOSE_PATH: str = os.path.join("/Users", "simon", "bsose_monthly")
-    GEN_DATA_PATH: str = BSOSE_PATH
-    DEFAULT_NC: str = (
-        "~/pyxpcm_sithom/nc/i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
-    )
-
-else:
-    assert False
-
+os.makedirs(GEN_DATA_PATH ,exist_ok=True)
 # end ****DATA LOCATION section***
 
 # Salt, Theta, Uvel, Vvel
@@ -98,7 +87,6 @@ CLUST_COLORS: str = "Set1" # "Dark1"
 # Move plots to location
 FINAL_LOC: str = "../FBSO/images"
 
-
-# infor for profile plots
+# info for profile plots
 ZS = [-x for x in range(300, 2000, 10)] # Z levels.
 LZ = len(ZS) # number of Z levels.
