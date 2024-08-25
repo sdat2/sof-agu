@@ -2,6 +2,7 @@
 
 # Place all your constants here
 import os
+from typing import Literal, List
 import numpy as np
 import pathlib
 from sys import platform
@@ -10,37 +11,36 @@ import cmocean.cm as cmo
 # Note: constants should be UPPER_CASE
 
 # Basic location defaults, to be referenced from here:
-constants_path = os.path.realpath(__file__)
-SRC_PATH = os.path.dirname(constants_path)
-PROJECT_PATH = os.path.dirname(SRC_PATH)
-DATA_PATH = os.path.join(PROJECT_PATH, "nc")
-FIGURE_PATH = os.path.join(PROJECT_PATH, "figures")
-KO_PATH = os.path.join(SRC_PATH, "data", "kim_(&orsi)_altimetric_fronts")
+constants_path: str = os.path.realpath(__file__)
+SRC_PATH: str = os.path.dirname(constants_path)
+PROJECT_PATH: str = os.path.dirname(SRC_PATH)
+DATA_PATH: str = os.path.join(PROJECT_PATH, "nc")
+FIGURE_PATH: str = os.path.join(PROJECT_PATH, "figures")
+KO_PATH: str = os.path.join(SRC_PATH, "data", "kim_(&orsi)_altimetric_fronts")
 
 # Figure type
-FIGURE_TYPE = ".png"
+FIGURE_TYPE: Literal[".png", ".pdf"] = ".png"
 
 # start ****DATA LOCATION section***
-# This will certainly need to be changed on your macine
+# This will certainly need to be changed on your machine
 
 # Paths to BSOSE (unique to Jasmin)
 if platform in ["Linux", "linux"]:
     # Data directory on GWS
-    GEN_ROOT = pathlib.Path("/gws/nopw/j04/ai4er/users/sdat2/OLD")
+    GEN_ROOT = DATA_PATH  # "/gws/nopw/j04/ai4er/users/sdat2/OLD")
     GEN_DATA_PATH: str = os.path.join(GEN_ROOT, "bsose_data")
     BSOSE_PATH: str = os.path.join(GEN_DATA_PATH, "bsose_stuv")
-    DEFAULT_NC: str = (
-        str(GEN_ROOT) + "/nc/i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
+    DEFAULT_NC: str = os.path.join(
+        GEN_ROOT, "i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
     )
 
 # Paths to different BSOSE-i106 files (unique to my machine):
 elif platform in ["Darwin", "darwin"]:
-    GEN_ROOT = os.path.join("/Users", "simon")
+    # GEN_ROOT = os.path.join("/Users", "simon")
+    GEN_ROOT = DATA_PATH
     BSOSE_PATH: str = os.path.join(GEN_ROOT, "bsose_monthly")
     GEN_DATA_PATH: str = BSOSE_PATH
-    DEFAULT_NC: str = (
-        "~/pyxpcm_sithom/nc/i-metric-joint-k-5-d-3.nc"  # not valid in jasmin.
-    )
+    DEFAULT_NC: str = os.path.join(DATA_PATH, "i-metric-joint-k-5-d-3.nc")
 
 else:
     assert False
@@ -82,7 +82,7 @@ np.random.seed(SEED)  # feed the run name to np random seed - synchronises all
 # random variables used locally to make it reproducible.
 MIN_DEPTH: float = 300  # the depth of the minimum cut off (m)
 MAX_DEPTH: float = 2000  # the depth of the maximum cut off (m)
-K_LIST: list = [5, 4, 2, 10]  # K's to make when running batch script.
+K_LIST: List[int] = [5, 4, 2, 10]  # K's to make when running batch script.
 K_CLUSTERS: int = 5  # number of clusters for the main example figure.
 D_PCS: int = 3  # number of principal components to be used.
 EXAMPLE_TIME_INDEX: int = 40  # the default time to go for.
