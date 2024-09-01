@@ -72,6 +72,8 @@ of individual eddy-like features (such as the Agulhas rings).
 
     ```bash
     conda activate ./env
+
+    micromamba activate ./env
     ```
 
     ```bash

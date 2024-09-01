@@ -42,7 +42,6 @@ def _old_order_indexes(dataarray: xr.DataArray, index_list: list) -> np.ndarray:
 
     Returns:
         np.ndarray: dataarray_values.
-
     """
 
     coords_list = []
