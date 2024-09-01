@@ -2,13 +2,14 @@
 
 # Place all your constants here
 import os
-from typing import Literal, List
+from typing import Literal, List, Dict
 import numpy as np
-import pathlib
 from sys import platform
 import cmocean.cm as cmo
 
 # Note: constants should be UPPER_CASE
+
+# TODO move some of these to a config file.
 
 # Basic location defaults, to be referenced from here:
 constants_path: str = os.path.realpath(__file__)
@@ -37,7 +38,7 @@ if platform in ["Linux", "linux"]:
 # Paths to different BSOSE-i106 files (unique to my machine):
 elif platform in ["Darwin", "darwin"]:
     # GEN_ROOT = os.path.join("/Users", "simon")
-    GEN_ROOT = DATA_PATH
+    GEN_ROOT: str = DATA_PATH
     BSOSE_PATH: str = os.path.join(GEN_ROOT, "bsose_monthly")
     GEN_DATA_PATH: str = BSOSE_PATH
     DEFAULT_NC: str = os.path.join(DATA_PATH, "i-metric-joint-k-5-d-3.nc")
@@ -46,6 +47,13 @@ else:
     assert False
 
 # end ****DATA LOCATION section***
+
+
+os.makedirs(DATA_PATH, exist_ok=True)
+os.makedirs(FIGURE_PATH, exist_ok=True)
+os.makedirs(KO_PATH, exist_ok=True)
+os.makedirs(GEN_DATA_PATH, exist_ok=True)
+os.makedirs(BSOSE_PATH, exist_ok=True)
 
 # Salt, Theta, Uvel, Vvel
 SALT_FILE: str = os.path.join(BSOSE_PATH, "bsose_i106_2008to2012_monthly_Salt.nc")
@@ -66,9 +74,9 @@ CLUST_COORD: str = "cluster" # the name for the cluster coordinate/ dimension
 
 # Particular names within BSOSE-i106
 DEPTH_NAME: str = D_COORD
-USELESS_LIST: list = ["iter", "Depth", "rA", "drF", "hFacC"] # list of variables from BSOSE to discard before processing
-VAR_NAME_LIST: list = ["SALT", "THETA"] # variables used in to fit the pcm model on
-FEATURES_D: dict = {"THETA": "THETA", "SALT": "SALT"} # Mapping for within pyxpcm
+USELESS_LIST: List[str] = ["iter", "Depth", "rA", "drF", "hFacC"] # list of variables from BSOSE to discard before processing
+VAR_NAME_LIST: List[str] = ["SALT", "THETA"] # variables used in to fit the pcm model on
+FEATURES_D: Dict[str, str] = {"THETA": "THETA", "SALT": "SALT"} # Mapping for within pyxpcm
 
 # Naming of intermediate files
 INTERP_FILE_NAME: str = os.path.join(DATA_PATH, "interp.nc")
@@ -96,9 +104,10 @@ DEFAULT_COLORMAP = cmo.balance
 CLUST_COLORS: str = "Set1" # "Dark1"
 
 # Move plots to location
-FINAL_LOC: str = "../FBSO/images"
 
+FINAL_LOC: str = os.path.join(PROJECT_PATH, "images") # "../FBSO/images"
+os.makedirs(FINAL_LOC, exist_ok=True)
 
 # info for profile plots
-ZS = [-x for x in range(300, 2000, 10)] # Z levels.
-LZ = len(ZS) # number of Z levels.
+ZS: List[int] = [-x for x in range(300, 2000, 10)] # Z levels.
+LZ: int = len(ZS) # number of Z levels.

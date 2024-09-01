@@ -21,7 +21,7 @@ def return_pair_i_metric(
         pca (int, optional): Number of principal components. Defaults to cst.D_PCS.
         save_nc (bool, optional): Whether or not to save the resulting dataset.
             Defaults to True.
-        t_index (int, optional): time index cst.EXAMPLE_TIME_INDEX.
+        t_index (int, optional): Time index cst.EXAMPLE_TIME_INDEX.
 
     Returns:
         xr.DataArray: pair i metric.

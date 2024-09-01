@@ -24,7 +24,7 @@ import src.time_wrapper as twr
 
 
 @twr.timeit
-def make_all_figures():
+def make_all_figures() -> None:
     """
     Make all the figures in the paper in a sequence.
 
