@@ -56,10 +56,10 @@ os.makedirs(GEN_DATA_PATH, exist_ok=True)
 os.makedirs(BSOSE_PATH, exist_ok=True)
 
 # Salt, Theta, Uvel, Vvel
-SALT_FILE: str = os.path.join(BSOSE_PATH, "bsose_i106_2008to2012_monthly_Salt.nc")
-THETA_FILE: str = os.path.join(BSOSE_PATH, "bsose_i106_2008to2012_monthly_Theta.nc")
-VVEL_FILE: str = os.path.join(BSOSE_PATH, "bsose_i106_2008to2012_monthly_Vvel.nc")
-UVEL_FILE: str = os.path.join(BSOSE_PATH, "bsose_i106_2008to2012_monthly_Uvel.nc")
+SALT_FILE: str = os.path.join(BSOSE_PATH, "bsose_stuv", "bsose_i106_2008to2012_monthly_Salt.nc")
+THETA_FILE: str = os.path.join(BSOSE_PATH, "bsose_stuv", "bsose_i106_2008to2012_monthly_Theta.nc")
+VVEL_FILE: str = os.path.join(BSOSE_PATH, "bsose_stuv", "bsose_i106_2008to2012_monthly_Vvel.nc")
+UVEL_FILE: str = os.path.join(BSOSE_PATH, "bsose_stuv", "bsose_i106_2008to2012_monthly_Uvel.nc")
 
 # COORDS within BSOSE-i106
 Z_COORD: str = "Z"
